@@ -37,7 +37,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <TooltipProvider>
-          <SidebarProvider>
+          <SidebarProvider
+            style={{ "--sidebar-width": "280px" } as React.CSSProperties}
+          >
             <AppSidebar />
             <SidebarInset>
               <AppHeader />
