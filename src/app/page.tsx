@@ -49,12 +49,12 @@ export default function Home() {
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             Send
           </Button>
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button size="sm" variant="secondary">
             Add money
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="gap-1">
+              <Button size="sm" variant="secondary" className="gap-1">
                 Request
                 <ChevronDown className="size-4" />
               </Button>
