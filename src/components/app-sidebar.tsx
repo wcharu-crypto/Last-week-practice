@@ -2,14 +2,6 @@
 
 import Link from "next/link"
 import {
-  Home,
-  CreditCard,
-  List,
-  ArrowLeftRight,
-  Users,
-  BarChart3,
-} from "lucide-react"
-import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -22,63 +14,41 @@ import {
 /**
  * DESIGNER NOTE: Wise-style app sidebar (left navigation)
  * — Flat list only: Home, Cards, Transactions, Payments, Recipients, Insights (no sub-navigation).
- * — To restyle: edit className on Sidebar, or override --sidebar-* in globals.css
+ * — Icons are the Figma SVGs in public/figma/sidebar/.
+ * — Colours and sidebar width come from --sidebar-* in globals.css and the SidebarProvider in layout.tsx.
  */
+const NAV_ITEMS = [
+  { label: "Home", href: "/", icon: "/figma/sidebar/52b2b.svg", isActive: true },
+  { label: "Cards", href: "/", icon: "/figma/sidebar/02c19.svg" },
+  { label: "Transactions", href: "/", icon: "/figma/sidebar/016b1.svg" },
+  { label: "Payments", href: "/", icon: "/figma/sidebar/70445.svg" },
+  { label: "Recipients", href: "/", icon: "/figma/sidebar/10344.svg" },
+  { label: "Insights", href: "/", icon: "/figma/sidebar/869c4.svg" },
+]
+
 export function AppSidebar() {
   return (
     <Sidebar className="border-r border-sidebar-border">
       <SidebarContent>
-        <SidebarGroup>
+        {/* Figma: 24px horizontal and 16px vertical padding around the menu */}
+        <SidebarGroup className="px-6 py-4">
           <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive>
-                  <Link href="/" className="flex items-center gap-3">
-                    <Home className="size-4" />
-                    <span>Home</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/" className="flex items-center gap-3">
-                    <CreditCard className="size-4" />
-                    <span>Cards</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/" className="flex items-center gap-3">
-                    <List className="size-4" />
-                    <span>Transactions</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/" className="flex items-center gap-3">
-                    <ArrowLeftRight className="size-4" />
-                    <span>Payments</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/" className="flex items-center gap-3">
-                    <Users className="size-4" />
-                    <span>Recipients</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/" className="flex items-center gap-3">
-                    <BarChart3 className="size-4" />
-                    <span>Insights</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+            {/* Figma: 2px gap between items */}
+            <SidebarMenu className="gap-0.5">
+              {NAV_ITEMS.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={item.isActive}
+                    className="h-auto gap-4 rounded-full px-4 py-3 text-sm font-normal leading-5 data-[active=true]:font-semibold"
+                  >
+                    <Link href={item.href} className="flex items-center">
+                      <img src={item.icon} alt="" className="size-6 shrink-0" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
