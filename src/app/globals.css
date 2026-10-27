@@ -76,7 +76,7 @@
   --radius: 0.625rem;
   --background: var(--grey-100);
   --foreground: var(--grey-600);
-  --card: var(--grey-100);
+  --card: var(--grey-200);
   --card-foreground: var(--grey-600);
   --popover: var(--grey-100);
   --popover-foreground: var(--grey-600);
@@ -117,8 +117,8 @@
   --popover-foreground: var(--grey-100);
   --primary: var(--green-500);
   --primary-foreground: var(--green-700);
-  --secondary: var(--green-100);
-  --secondary-foreground: var(--green-700);
+  --secondary: var(--green-700);
+  --secondary-foreground: var(--green-500);
   --muted: var(--grey-500);
   --muted-foreground: var(--grey-300);
   --accent: var(--grey-500);

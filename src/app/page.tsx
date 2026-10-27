@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import {
   Card,
@@ -12,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ArrowUpCircle, PlusCircle, ChevronDown } from "lucide-react"
+import { ArrowUpCircle, PlusCircle } from "lucide-react"
 
 /**
  * DESIGNER NOTE: Wise-style dashboard — layout and structure only.
@@ -26,10 +27,10 @@ import { ArrowUpCircle, PlusCircle, ChevronDown } from "lucide-react"
  */
 
 const CURRENCY_ACCOUNTS = [
-  { code: "EUR", label: "EUR", accountId: "51568", balance: "1.00", flag: "🇪🇺" },
-  { code: "AUD", label: "AUD", accountId: "30779", balance: "0.00", flag: "🇦🇺" },
-  { code: "CAD", label: "CAD", accountId: "15376", balance: "0.00", flag: "🇨🇦" },
-  { code: "GBP", label: "GBP", accountId: "13159", balance: "0.00", flag: "🇬🇧" },
+  { code: "EUR", label: "EUR", accountId: "51568", balance: "1.00", flag: "/assets/flags/eur.png" },
+  { code: "AUD", label: "AUD", accountId: "30779", balance: "0.00", flag: "/assets/flags/aud.png" },
+  { code: "CAD", label: "CAD", accountId: "15376", balance: "0.00", flag: "/assets/flags/cad.png" },
+  { code: "GBP", label: "GBP", accountId: "13159", balance: "0.00", flag: "/assets/flags/gbp.png" },
 ]
 
 const RECENT_TRANSACTIONS = [
@@ -40,11 +41,13 @@ const RECENT_TRANSACTIONS = [
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col gap-8 p-6">
+    <div className="mx-auto flex w-full max-w-[1024px] flex-1 flex-col gap-8 p-6">
       {/* Total balance + actions */}
       <section className="space-y-4">
-        <h2 className="text-sm font-medium text-muted-foreground">Total balance</h2>
-        <p className="text-3xl font-bold tracking-tight">1.00 EUR</p>
+        <div className="space-y-0">
+          <p className="text-sm font-medium text-muted-foreground">Total balance</p>
+          <h2 className="text-3xl font-bold tracking-tight">1.00 EUR</h2>
+        </div>
         <div className="flex flex-wrap gap-2">
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             Send
@@ -54,9 +57,8 @@ export default function Home() {
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="secondary" className="gap-1">
+              <Button size="sm" variant="secondary">
                 Request
-                <ChevronDown className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
@@ -68,14 +70,14 @@ export default function Home() {
       </section>
 
       {/* Currency account cards */}
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid gap-[12px] overflow-x-auto sm:grid-cols-[repeat(2,256px)] lg:grid-cols-[repeat(4,256px)]">
         {CURRENCY_ACCOUNTS.map((account) => (
-          <Card key={account.code} className="bg-muted/50">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <span className="text-lg" aria-hidden>{account.flag}</span>
-              <CardTitle className="text-base font-medium">{account.label}</CardTitle>
+          <Card key={account.code} className="h-[206px] w-[256px] justify-between gap-0 border-0 bg-card p-4 shadow-none">
+            <CardHeader className="flex flex-row items-center justify-start space-y-0 px-0 pb-0">
+              <Image src={account.flag} alt="" width={48} height={48} className="size-12" />
+              <CardTitle className="text-base font-semibold text-muted-foreground">{account.label}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-1">
+            <CardContent className="space-y-0.5 px-0">
               <p className="text-xs text-muted-foreground">Account - {account.accountId}</p>
               <p className="text-2xl font-bold">{account.balance}</p>
             </CardContent>
@@ -94,7 +96,7 @@ export default function Home() {
             See all
           </Link>
         </div>
-        <ul className="divide-y divide-border rounded-lg border bg-card">
+        <ul className="divide-y divide-border rounded-lg border">
           {RECENT_TRANSACTIONS.map((tx) => (
             <li key={tx.id} className="flex items-center gap-4 px-4 py-3">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-muted">
